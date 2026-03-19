@@ -11,6 +11,16 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 
 > RFID key fob access, remote lock/unlock, real-time status, offline event caching, configurable settings - all controlled from your phone!
 
+## Repositories
+
+| Repo | Description |
+|---|---|
+| [`SmartLock-Firmware`](https://github.com/Boudraa-SmartLock/SmartLock-Firmware) | ESP32 C++ firmware (PlatformIO) |
+| [`SmartLock-Backend`](https://github.com/Boudraa-SmartLock/SmartLock-Backend) | Node.js WebSocket relay + REST API |
+| [`SmartLock-DB-API`](https://github.com/Boudraa-SmartLock/SmartLock-DB-API) | ASP.NET Core database API |
+| [`SmartLock-Mobile`](https://github.com/Boudraa-SmartLock/SmartLock-Mobile) | React Native mobile app (Expo) |
+| [`SmartLock-WebApp`](https://github.com/Boudraa-SmartLock/SmartLock-WebApp) | Web dashboard |
+
 ## Table of Contents
 
 - [Demo](#demo)
@@ -23,7 +33,6 @@ A full-stack IoT smart lock system built from scratch, with the following techno
   - [Components](#components)
   - [Pin Assignments](#pin-assignments)
   - [Circuit Diagram](#circuit-diagram)
-- [Repositories](#repositories)
 - [Setup](#setup)
   - [Firmware (ESP32)](#firmware-esp32)
   - [Backend (Node.js)](#backend-nodejs)
@@ -115,16 +124,6 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 ### Circuit Diagram
 
 <img width="3000" height="1885" alt="circuit_image (1)" src="https://github.com/user-attachments/assets/5a13300f-53da-4bc5-9b8e-19d0f6fc733c" />
-
-## Repositories
-
-| Repo | Description |
-|---|---|
-| [`SmartLock-Firmware`](https://github.com/Boudraa-SmartLock/SmartLock-Firmware) | ESP32 C++ firmware (PlatformIO) |
-| [`SmartLock-Backend`](https://github.com/Boudraa-SmartLock/SmartLock-Backend) | Node.js WebSocket relay + REST API |
-| [`SmartLock-DB-API`](https://github.com/Boudraa-SmartLock/SmartLock-DB-API) | ASP.NET Core database API |
-| [`SmartLock-Mobile`](https://github.com/Boudraa-SmartLock/SmartLock-Mobile) | React Native mobile app (Expo) |
-| [`SmartLock-WebApp`](https://github.com/Boudraa-SmartLock/SmartLock-WebApp) | Web dashboard |
 
 ## Setup
 
