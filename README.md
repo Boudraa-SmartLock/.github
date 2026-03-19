@@ -10,7 +10,7 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 
 > RFID key fob access, remote lock/unlock, real-time status, offline event caching, configurable settings - all controlled from your phone!
 
-## 📑 Table of Contents
+## Table of Contents
 
 - [Demo](#demo)
 - [Architecture](#️architecture)
@@ -114,17 +114,17 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 
 <img width="3000" height="1885" alt="circuit_image (1)" src="https://github.com/user-attachments/assets/5a13300f-53da-4bc5-9b8e-19d0f6fc733c" />
 
-## 📦 Repositories
+## Repositories
 
 | Repo | Description |
 |---|---|
-| [`SmartLock-Firmware`](https://github.com/adamboudruh/SmartLock-Firmware) | ESP32 C++ firmware (PlatformIO) |
-| [`SmartLock-Backend`](https://github.com/adamboudruh/SmartLock-Backend) | Node.js WebSocket relay + REST API |
-| [`SmartLock-DB-API`](https://github.com/adamboudruh/SmartLock-DB-API) | ASP.NET Core database API |
-| [`SmartLock-Mobile`](https://github.com/adamboudruh/SmartLock-Mobile) | React Native mobile app (Expo) |
-| [`SmartLock-WebApp`](https://github.com/adamboudruh/SmartLock-WebApp) | Web dashboard |
+| [`SmartLock-Firmware`](https://github.com/Boudraa-SmartLock/SmartLock-Firmware) | ESP32 C++ firmware (PlatformIO) |
+| [`SmartLock-Backend`](https://github.com/Boudraa-SmartLock/SmartLock-Backend) | Node.js WebSocket relay + REST API |
+| [`SmartLock-DB-API`](https://github.com/Boudraa-SmartLock/SmartLock-DB-API) | ASP.NET Core database API |
+| [`SmartLock-Mobile`](https://github.com/Boudraa-SmartLock/SmartLock-Mobile) | React Native mobile app (Expo) |
+| [`SmartLock-WebApp`](https://github.com/Boudraa-SmartLock/SmartLock-WebApp) | Web dashboard |
 
-## 🚀 Setup
+## Setup
 
 ### Firmware (ESP32)
 
@@ -176,7 +176,7 @@ A full-stack IoT smart lock system built from scratch, with the following techno
    ```
 4. `npx expo start`
 
-## 🔒 Security
+## Security
 
 | Layer | Mechanism |
 |---|---|
@@ -186,7 +186,7 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 | Device Secret | Stored in ESP32 NVS (encrypted flash partition) |
 | Private Key | Azure Key Vault reference (production) or `.env` (development) |
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the relevant repository
 2. Create a feature branch: `git checkout -b feature/my-feature`
@@ -338,6 +338,6 @@ sequenceDiagram
 - **Offline-first architecture** - designing the event cache and bulk sync flow to handle multi-day outages gracefully
 - **Cross-platform UID hashing** - ensuring identical SHA-256 output across C++ (mbedtls), TypeScript (expo-crypto), and .NET apps
 
-## 📄 License
+## License
 
 MIT — see [LICENSE](LICENSE) for details.
