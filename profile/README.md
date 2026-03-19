@@ -7,9 +7,9 @@
 
 # SmartLock
 
-A full-stack IoT smart lock system built from scratch, with the following technologies used: ESP32 firmware in C++, Node.js backend for REST and WebSocket communication, .NET EF Core API for database management, React Native mobile app, and Azure cloud infrastructure.
+A full-stack IoT smart lock system built from scratch spanning embedded firmware, cloud services, and a mobile app. The project combines C++ firmware on an ESP32 microcontroller, a Node.js WebSocket relay backend, a .NET EF Core database API secured with JWT, a React Native mobile app with NFC support, and Azure cloud infrastructure — all working together to deliver real-time RFID access control with offline resilience.
 
-> RFID key fob access, remote lock/unlock, real-time status, offline event caching, configurable settings - all controlled from your phone!
+> RFID key fob access, remote lock/unlock, real-time status updates, offline event caching, configurable settings like auto-lock timers and custom unlock tones - all controlled from your phone!
 
 ## Repositories
 
