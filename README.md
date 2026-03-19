@@ -36,7 +36,7 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 
 | Demo | Link |
 |---|---|
-| Key Registration Walkthrough | [Link to video]([#](https://drive.google.com/file/d/1Lrqyny7eYYVuOpfj4T0UdPLoxUwSyFK3/view?usp=sharing)) |
+| Key Registration Walkthrough | [Link to video](https://drive.google.com/file/d/1Lrqyny7eYYVuOpfj4T0UdPLoxUwSyFK3/view?usp=sharing) |
 
 ## Architecture
 
