@@ -1,10 +1,38 @@
+![ESP32](https://img.shields.io/badge/ESP32-C++-blue?logo=espressif)
+![Node.js](https://img.shields.io/badge/Node.js-Express-green?logo=node.js)
+![.NET](https://img.shields.io/badge/.NET_8-EF_Core-purple?logo=dotnet)
+![React Native](https://img.shields.io/badge/React_Native-Expo-61DAFB?logo=react)
+![Azure](https://img.shields.io/badge/Azure-SQL+App_Service-0078D4?logo=microsoftazure)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 # SmartLock
 
 A full-stack IoT smart lock system built from scratch, with the following technologies used: ESP32 firmware in C++, Node.js backend for REST and WebSocket communication, .NET EF Core API for database management, React Native mobile app, and Azure cloud infrastructure.
 
 > RFID key fob access, remote lock/unlock, real-time status, offline event caching, configurable settings - all controlled from your phone!
 
-## 📹 Demo
+## 📑 Table of Contents
+
+- [Demo](#demo)
+- [Architecture](#️architecture)
+- [Schema Diagram](#schema-diagram)
+- [Features](#features)
+  - [Hardware](#hardware)
+  - [Software](#software)
+- [Hardware Details](#-hardware)
+  - [Components](#components)
+  - [Pin Assignments](#pin-assignments)
+  - [Circuit Diagram](#circuit-diagram)
+- [Repositories](#-repositories)
+- [Security](#-security)
+- [Challenges & Lessons Learned](#-challenges--lessons-learned)
+- [Contributing](#-contributing)
+- [Sequence Diagrams](#sequence-diagrams)
+  - [Smart Lock Boot](#smart-lock-boot)
+  - [RFID Unlock](#rfid-unlock)
+  - [Remote Lock/Unlock](#remote-lockunlock-from-mobile-app)
+- [License](#-license)
+
+## Demo
 
 | Demo | Link |
 |---|---|
@@ -13,6 +41,7 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 ## Architecture
 
 <img width="1364" height="458" alt="architecture_diagram" src="https://github.com/user-attachments/assets/02779569-5238-470a-9963-11ee3c6a7d6d" />
+
 
 ## Schema Diagram
 
@@ -302,6 +331,12 @@ sequenceDiagram
         App->>App: Update dashboard UI
     end
 ```
+
+## Challenges & Lessons Learned
+- **Relay EMI noise** crashing the MFRC522 RFID reader - solved with RC522 re-initialization after every relay actuation
+- **WebSocket race conditions** between ESP32 dual cores - solved by keeping all WS operations on core 1
+- **Offline-first architecture** - designing the event cache and bulk sync flow to handle multi-day outages gracefully
+- **Cross-platform UID hashing** - ensuring identical SHA-256 output across C++ (mbedtls), TypeScript (expo-crypto), and .NET apps
 
 ## 📄 License
 
