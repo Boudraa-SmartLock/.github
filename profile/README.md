@@ -205,8 +205,8 @@ Already deployed to Azure. To run locally for development:
 
 | Layer | Mechanism |
 |---|---|
-| ESP32 → Backend | HMAC-SHA256 authentication with device-specific shared secret |
-| Backend → DB API | RS256 JWT signed with private key, verified by DB API with public key |
+| ESP32 --> Backend | HMAC-SHA256 authentication with device-specific shared secret |
+| Backend --> DB API | RS256 JWT signed with private key, verified by DB API with public key |
 | RFID UIDs | Salted SHA-256 hash before storage or transmission |
 | Device Secret | Stored in ESP32 NVS (encrypted flash partition) |
 | Private Key | Azure Key Vault reference (production) or `.env` (development) |
