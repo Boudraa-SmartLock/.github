@@ -4,6 +4,7 @@
 ![React Native](https://img.shields.io/badge/React_Native-Expo-61DAFB?logo=react)
 ![Azure](https://img.shields.io/badge/Azure-SQL+App_Service-0078D4?logo=microsoftazure)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+
 # SmartLock
 
 A full-stack IoT smart lock system built from scratch, with the following technologies used: ESP32 firmware in C++, Node.js backend for REST and WebSocket communication, .NET EF Core API for database management, React Native mobile app, and Azure cloud infrastructure.
@@ -13,24 +14,29 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 ## Table of Contents
 
 - [Demo](#demo)
-- [Architecture](#️architecture)
+- [Architecture](#architecture)
 - [Schema Diagram](#schema-diagram)
 - [Features](#features)
   - [Hardware](#hardware)
   - [Software](#software)
-- [Hardware Details](#-hardware)
+- [Hardware Details](#hardware-1)
   - [Components](#components)
   - [Pin Assignments](#pin-assignments)
   - [Circuit Diagram](#circuit-diagram)
-- [Repositories](#-repositories)
-- [Security](#-security)
-- [Challenges & Lessons Learned](#-challenges--lessons-learned)
-- [Contributing](#-contributing)
+- [Repositories](#repositories)
+- [Setup](#setup)
+  - [Firmware (ESP32)](#firmware-esp32)
+  - [Backend (Node.js)](#backend-nodejs)
+  - [DB API (ASP.NET Core)](#db-api-aspnet-core)
+  - [Mobile App (Expo)](#mobile-app-expo)
+- [Security](#security)
+- [Challenges & Lessons Learned](#challenges--lessons-learned)
+- [Contributing](#contributing)
 - [Sequence Diagrams](#sequence-diagrams)
   - [Smart Lock Boot](#smart-lock-boot)
   - [RFID Unlock](#rfid-unlock)
   - [Remote Lock/Unlock](#remote-lockunlock-from-mobile-app)
-- [License](#-license)
+- [License](#license)
 
 ## Demo
 
@@ -41,7 +47,6 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 ## Architecture
 
 <img width="1364" height="458" alt="architecture_diagram" src="https://github.com/user-attachments/assets/02779569-5238-470a-9963-11ee3c6a7d6d" />
-
 
 ## Schema Diagram
 
@@ -126,11 +131,27 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 
 ## Setup
 
+The backend and DB API are deployed to Azure App Service. The ESP32 firmware and mobile app connect to the deployed URLs.
+
+| Service | URL |
+|---|---|
+| Backend (Node.js) | `https://smartlock-backend-ezhcfahsavavfehu.canadacentral-01.azurewebsites.net` |
+| DB API (.NET) | `https://smartlock-db-api-cffjc8fthjfwb9hu.canadacentral-01.azurewebsites.net` |
+
 ### Firmware (ESP32)
 
 1. Install [PlatformIO](https://platformio.org/)
 2. Clone `SmartLock-Firmware`
-3. Create `include/Config.h` from `Config.h.example` with your WiFi credentials and backend URL
+3. Create `include/Config.h` from `Config.h.example`:
+   ```cpp
+   #pragma once
+
+   #define WIFI_SSID     "YOUR_WIFI_SSID"
+   #define WIFI_PASSWORD "YOUR_WIFI_PASSWORD"
+
+   #define BACKEND_URL   "https://smartlock-backend-ezhcfahsavavfehu.canadacentral-01.azurewebsites.net"
+   #define WS_URL        "wss://smartlock-backend-ezhcfahsavavfehu.canadacentral-01.azurewebsites.net/device"
+   ```
 4. Provision device credentials to NVS (one-time):
    ```cpp
    Preferences prefs;
@@ -143,12 +164,14 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 
 ### Backend (Node.js)
 
-1. Clone SmartLock-Backend
-2. `npm i`
+Already deployed to Azure. To run locally for development:
+
+1. Clone `SmartLock-Backend`
+2. `npm install`
 3. Create `.env`:
    ```env
    PORT=3000
-   DB_API_URL=https://your-db-api.azurewebsites.net
+   DB_API_URL=https://smartlock-db-api-cffjc8fthjfwb9hu.canadacentral-01.azurewebsites.net
    DEVICE_ID=your-device-guid
    BACKEND_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
    ```
@@ -156,13 +179,15 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 
 ### DB API (ASP.NET Core)
 
+Already deployed to Azure. To run locally for development:
+
 1. Clone `SmartLock-DB-API`
 2. Set connection string in `appsettings.json` or environment:
    ```json
    { "ConnectionStrings": { "DefaultConnection": "Server=...;Database=smartlock;..." } }
    ```
 3. Set `BACKEND_PUBLIC_KEY` environment variable (PEM format) or place `public.pem` in project root
-4. `dotnet ef database update` (apply migrations)
+4. Apply migrations: `dotnet ef database update`
 5. `dotnet run`
 
 ### Mobile App (Expo)
@@ -171,8 +196,8 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 2. `npm install`
 3. Create `.env`:
    ```env
-   EXPO_PUBLIC_API_URL=http://your-backend-ip:3000
-   EXPO_PUBLIC_WS_URL=ws://your-backend-ip:3000/mobile
+   EXPO_PUBLIC_API_URL=https://smartlock-backend-ezhcfahsavavfehu.canadacentral-01.azurewebsites.net
+   EXPO_PUBLIC_WS_URL=wss://smartlock-backend-ezhcfahsavavfehu.canadacentral-01.azurewebsites.net/mobile
    ```
 4. `npx expo start`
 
@@ -180,8 +205,8 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 
 | Layer | Mechanism |
 |---|---|
-| ESP32 --> Backend | HMAC-SHA256 authentication with device-specific shared secret |
-| Backend --> DB API | RS256 JWT signed with private key, verified by DB API with public key |
+| ESP32 → Backend | HMAC-SHA256 authentication with device-specific shared secret |
+| Backend → DB API | RS256 JWT signed with private key, verified by DB API with public key |
 | RFID UIDs | Salted SHA-256 hash before storage or transmission |
 | Device Secret | Stored in ESP32 NVS (encrypted flash partition) |
 | Private Key | Azure Key Vault reference (production) or `.env` (development) |
@@ -197,7 +222,7 @@ A full-stack IoT smart lock system built from scratch, with the following techno
 ## Sequence Diagrams
 
 ### Smart lock boot
-## Sequence Diagrams
+
 ```mermaid
 sequenceDiagram
     participant ESP as ESP32
@@ -254,6 +279,7 @@ sequenceDiagram
 ```
 
 ### RFID Unlock
+
 ```mermaid
 sequenceDiagram
     participant Fob as Key Fob
@@ -297,6 +323,7 @@ sequenceDiagram
 ```
 
 ### Remote Lock/Unlock from Mobile APP
+
 ```mermaid
 sequenceDiagram
     participant App as Mobile App
@@ -333,6 +360,7 @@ sequenceDiagram
 ```
 
 ## Challenges & Lessons Learned
+
 - **Relay EMI noise** crashing the MFRC522 RFID reader - solved with RC522 re-initialization after every relay actuation
 - **WebSocket race conditions** between ESP32 dual cores - solved by keeping all WS operations on core 1
 - **Offline-first architecture** - designing the event cache and bulk sync flow to handle multi-day outages gracefully
