@@ -3,7 +3,6 @@
 ![.NET](https://img.shields.io/badge/.NET_8-EF_Core-purple?logo=dotnet)
 ![React Native](https://img.shields.io/badge/React_Native-Expo-61DAFB?logo=react)
 ![Azure](https://img.shields.io/badge/Azure-SQL+App_Service-0078D4?logo=microsoftazure)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 
 # SmartLock
 
